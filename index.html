@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Text Extractor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            margin: 0;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 500px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            max-width: 80%;
+            margin: 20px auto;
+        }
+
+        /* Add styles for the text editor */
+        textarea {
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            resize: vertical;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PDF Text Extractor</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdf_file" accept=".pdf" required>
+        <br><br>
+        <button type="submit">Extract Text</button>
+        <!-- ... Your existing code ... -->
+        <script>
+            // JavaScript code to handle the button click and redirect to display.html
+            document.getElementById('extractButton').addEventListener('click', function() {
+                // Handle form submission (e.g., file upload) here if needed
+                // ...
+    
+                // Redirect to display.html
+                window.location.href = 'notepad_display.html';
+            });
+        </script>
+</body>
+</html>

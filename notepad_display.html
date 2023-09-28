@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+            body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            margin: 0;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+        }
+        button[type="submit"] {
+        background-color: #007bff; /* Blue background color */
+        color: #fff; /* White text color */
+        padding: 10px 20px; /* Padding for the button */
+        border: none; /* Remove button border */
+        cursor: pointer; /* Add a pointer cursor on hover */
+        margin-right: 10px; /* Add margin to separate buttons */
+    }
+
+    /* Style for the "Reset" button */
+    button[type="button"] {
+        background-color: #f00; /* Red background color */
+        color: #fff; /* White text color */
+        padding: 10px 20px; /* Padding for the button */
+        border: none; /* Remove button border */
+        cursor: pointer; /* Add a pointer cursor on hover */
+    }
+  
+.styled-button {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Padding around the button text */
+    border: none; /* Remove the default button border */
+    cursor: pointer; /* Change cursor to a pointer on hover */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+}
+
+/* Add a hover effect */
+.styled-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+/* styles.css */
+
+/* Hide the popup container by default */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7); /* Semi-transparent background */
+    z-index: 1;
+}
+
+.popup-content {
+    background-color: #fff; /* White background color for the popup */
+    max-width: 400px;
+    margin: 0 auto; /* Center the popup horizontally */
+    position: absolute;
+    top: 50%; /* Center the popup vertically */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+        h2 {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            max-width: 80%;
+            margin: 20px auto;
+        }
+
+        /* Add styles for the text editor */
+        textarea#editor {
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            resize: vertical;
+            min-height: 200px;
+        }
+
+            #container {
+                width: 1000px;
+                margin: 20px auto;
+            }
+            .ck-editor__editable[role="textbox"] {
+                /* editing area */
+                min-height: 200px;
+            }
+            .ck-content .image {
+                /* block images */
+                max-width: 80%;
+                margin: 20px auto;
+            }
+        </style>
+        <h1> PDF Extracted Text</h1>
+        <method="POST">
+            <textarea id="editor" name="Webevis Technologies">{{ extracted_text }}</textarea>
+                    </form>
+            </form>
+            <div id="container">
+                <div id="editor">
+                </div>
+            </div>
+        <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .catch(error => {
+                        console.error(error);
+                    });
+        
+                // Function to save the text to a text file
+                CKEDITOR.ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error(error);
+            });
+
+        // Function to save the text to a variable
+        function saveText() {
+            const textContent = document.getElementById('editor').value;
+            initialText = textContent; // Update the initial text
+            alert("Text saved!");
+        }
+
+        // Function to reset the text area to the initial value
+        function resetText() {
+            document.getElementById('editor').value = initialText;
+        }
+            // Function to display the popup when the button is clicked
+            document.getElementById("showPopupButton").addEventListener("click", function() {
+                document.getElementById("popupContainer").style.display = "block";
+            });
+            
+            // Function to close the popup when the close button is clicked
+            document.getElementById("closePopupButton").addEventListener("click", function() {
+                document.getElementById("popupContainer").style.display = "none";
+            });
+            </script>
+        <!--
+            The "super-build" of CKEditor&nbsp;5 served via CDN contains a large set of plugins and multiple editor types.
+            See https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start.html#running-a-full-featured-editor-from-cdn
+        -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/ckeditor.js"></script>
+        <!--
+            Uncomment to load the Spanish translation
+            <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/super-build/translations/es.js"></script>
+        -->
+        <script>
+            // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+            // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+            CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+                // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                toolbar: {
+                    items: [
+                        'exportPDF','exportWord', '|',
+                        'findAndReplace', 'selectAll', '|',
+                        'heading', '|',
+                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                        'bulletedList', 'numberedList', 'todoList', '|',
+                        'outdent', 'indent', '|',
+                        'undo', 'redo',
+                        '-',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                        'alignment', '|',
+                        'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                        'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                        'textPartLanguage', '|',
+                        'sourceEditing'
+                    ],
+                    shouldNotGroupWhenFull: true
+                },
+                // Changing the language of the interface requires loading the language file using the <script> tag.
+                // language: 'es',
+                list: {
+                    properties: {
+                        styles: true,
+                        startIndex: true,
+                        reversed: true
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                heading: {
+                    options: [
+                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                    ]
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                placeholder: 'Welcome to Webevis Technologies',
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                fontFamily: {
+                    options: [
+                        'default',
+                        'Arial, Helvetica, sans-serif',
+                        'Courier New, Courier, monospace',
+                        'Georgia, serif',
+                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                        'Tahoma, Geneva, sans-serif',
+                        'Times New Roman, Times, serif',
+                        'Trebuchet MS, Helvetica, sans-serif',
+                        'Verdana, Geneva, sans-serif'
+                    ],
+                    supportAllValues: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                fontSize: {
+                    options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+                    supportAllValues: true
+                },
+                // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                htmlSupport: {
+                    allow: [
+                        {
+                            name: /.*/,
+                            attributes: true,
+                            classes: true,
+                            styles: true
+                        }
+                    ]
+                },
+                // Be careful with enabling previews
+                // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                htmlEmbed: {
+                    showPreviews: true
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                link: {
+                    decorators: {
+                        addTargetToExternalLinks: true,
+                        defaultProtocol: 'https://',
+                        toggleDownloadable: {
+                            mode: 'manual',
+                            label: 'Downloadable',
+                            attributes: {
+                                download: 'file'
+                            }
+                        }
+                    }
+                },
+                // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                mention: {
+                    feeds: [
+                        {
+                            marker: '@',
+                            feed: [
+                                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                '@sugar', '@sweet', '@topping', '@wafer'
+                            ],
+                            minimumCharacters: 1
+                        }
+                    ]
+                },
+                // The "super-build" contains more premium features that require additional configuration, disable them below.
+                // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                removePlugins: [
+                    // These two are commercial, but you can try them out without registering to a trial.
+                    // 'ExportPdf',
+                    // 'ExportWord',
+                    'CKBox',
+                    'CKFinder',
+                    'EasyImage',
+                    // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                    // Storing images as Base64 is usually a very bad idea.
+                    // Replace it on production website with other solutions:
+                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                    // 'Base64UploadAdapter',
+                    'RealTimeCollaborativeComments',
+                    'RealTimeCollaborativeTrackChanges',
+                    'RealTimeCollaborativeRevisionHistory',
+                    'PresenceList',
+                    'Comments',
+                    'TrackChanges',
+                    'TrackChangesData',
+                    'RevisionHistory',
+                    'Pagination',
+                    'WProofreader',
+                    // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                    // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+                    'MathType',
+                    // The following features are part of the Productivity Pack and require additional license.
+                    'SlashCommand',
+                    'Template',
+                    'DocumentOutline',
+                    'FormatPainter',
+                    'TableOfContents',
+                    'PasteFromOfficeEnhanced'
+                ]
+            });
+            
+    
+        </script>
+    </body>
+</html>
